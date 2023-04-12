@@ -1,5 +1,6 @@
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
    apiKey: "AIzaSyDGbRh9KmZPXPtbkm7lKbRNJ9CqPod2p_Y",
@@ -14,3 +15,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 export const auth = getAuth(app);
+export const db = getFirestore(app);
+export const providerGoogle = new GoogleAuthProvider();
+providerGoogle.addScope("https://www.googleapis.com/auth/contacts.readonly");
+export const providerFacebook = new FacebookAuthProvider();
