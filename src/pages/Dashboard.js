@@ -12,9 +12,13 @@ const Dashboard = ({ user, setUser, setLoggedIn }) => {
       setLoggedIn(false);
    };
    return (
-      <div>
-         <Sidebar signout={signout} user={user} />
-         <Main />
+      <div className="dashboard-container">
+         <div className="element">
+            <Sidebar signout={signout} user={user} />
+         </div>
+         <div className="main">
+            <Main />
+         </div>
       </div>
    );
 };

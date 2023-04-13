@@ -1,0 +1,32 @@
+.profile-container {
+	background-color: rgba(108, 117, 125, 0.5);
+	border-radius: 1rem;
+	width: 50rem ;
+	display: flex;
+	margin-left: auto;
+	margin-right: auto;
+	flex-direction: column;
+	align-items: center;
+	}
+
+	.profile-item {
+		margin: 1rem 3rem 1rem 3rem;
+		flex: 1;
+		display: flex;
+		align-items: center;
+	}
+
+	.profile-item-label {
+		width: 4rem;
+		color: lightgray;
+	}
+
+	.profile-item-input {
+		padding-left: 1rem;
+	width: 25rem;
+	height: 2rem;
+	border-radius: 5px;
+	outline: none;
+	border: none;
+	margin: 1rem 3rem 1rem 3rem;
+	}

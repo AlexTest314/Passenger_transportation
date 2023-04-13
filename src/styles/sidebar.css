@@ -1,12 +1,16 @@
 .sidebar-open {
 	display: flex;
 	flex-direction: column;
+	justify-content: space-between;
 	background-color: rgba(108, 117, 125, 0.5);
 	width: 15rem;
 	margin-left: 0rem;
 	height: 100vh;
 }
 .sidebar-close {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 	background-color: rgba(108, 117, 125, 0.5);
 	width: 5rem;
 	height: 100vh;
@@ -22,9 +26,6 @@
 	margin-left: 1.5rem;
 }
 
-.sidebar-icon-close {
-	height: 40px;
-}
 
 .sidebar-section {
 	background-color: rgba(108, 117, 125, 0);
@@ -32,6 +33,12 @@
 
 .sidebar-section.selected {
 	background-color: rgba(108, 117, 125, 1);
+}
+
+.sidebar-signout-btn-close {
+ margin-left: 0.5rem;
+ margin-bottom: 0.5rem;
+ width: 4rem;
 }
 
 
@@ -49,4 +56,5 @@
 .sidebar-signout-btn {
 	margin-left: 2rem;
 	margin-right: 2rem;
+	margin-bottom: 0.5rem;
 }

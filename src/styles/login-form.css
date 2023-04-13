@@ -3,7 +3,7 @@
 	height:29rem;
 	width: 32rem;
 	background-color: #17a2b8;
-	border-radius: 5px;
+	border-radius: 0.3rem;
 }
 .form-input:first-child {
 	margin-top: 1rem;
