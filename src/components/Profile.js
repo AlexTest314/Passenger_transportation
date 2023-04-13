@@ -1,35 +1,34 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Form, Button } from "bootstrap-4-react/lib/components";
 import "../styles/profile.css";
+import { createUpdateUserData } from "../helpers/firebase-db";
 
 const Profile = ({ user }) => {
    const [userInfo, setUserInfo] = useState({});
 
-   /*  async function getData() {
-      const docRef = doc(db, "auth");
-      const docSnap = await getDoc(docRef);
-
-      if (docSnap.exists()) {
-         console.log("Document data:", docSnap);
-      } else {
-         // docSnap.data() will be undefined in this case
-         console.log("No such document!");
-      }
-   } */
-
-   /* useEffect(() => {
+   useEffect(() => {
       setUserInfo({ ...userInfo, uid: user.uid, email: user.email });
-   }, [user]); */
+   }, [user]);
+
+   const onSubmit = async (e) => {
+      e.preventDefault();
+      createUpdateUserData(user);
+   };
+
    return (
-      <Form>
+      <Form onSubmit={onSubmit}>
          <div className="profile-container">
             <div className="profile-item">
                <label className="profile-item-label">Name</label>
                <input className="profile-item-input" type="name" placeholder="Enter name" onChange={(e) => setUserInfo({ ...userInfo, name: e.target.value })} />
             </div>
             <div className="profile-item">
-               <label className="profile-item-label">Surname</label>
-               <input className="profile-item-input" type="surname" placeholder="Enter surname" onChange={(e) => setUserInfo({ ...userInfo, surname: e.target.value })} />
+               <label className="profile-item-label">Phone</label>
+               <input className="profile-item-input" type="phone" placeholder="Enter surname" onChange={(e) => setUserInfo({ ...userInfo, surname: e.target.value })} />
+            </div>
+            <div className="profile-item">
+               <label className="profile-item-label">Email</label>
+               <input className="profile-item-input" type="surname" placeholder="Enter surname" disabled onChange={(e) => setUserInfo({ ...userInfo, surname: e.target.value })} />
             </div>
             <div className="profile-item">
                <label className="profile-item-label">Gender</label>
@@ -43,7 +42,7 @@ const Profile = ({ user }) => {
                <input className="profile-item-input" type="text" placeholder={"Enter age"} onChange={(e) => setUserInfo({ ...userInfo, age: e.target.value })} />
             </div>
 
-            <Button primary className="mb-3">
+            <Button primary className="mb-3" type="submit">
                Update information
             </Button>
          </div>

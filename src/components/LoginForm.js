@@ -3,119 +3,112 @@ import { Form, Button } from "bootstrap-4-react/lib/components";
 import Facebook from "../icons/facebook.svg";
 import Google from "../icons/google.svg";
 import Switcher from "./Switcher";
-import { addData, getData } from "../helpers/firebase-db";
-import { auth, providerFacebook, providerGoogle } from "../helpers/firebase-config";
+import { createUpdateUserData, getData } from "../helpers/firebase-db";
+import { auth, db, providerFacebook, providerGoogle } from "../helpers/firebase-config";
 import { GoogleAuthProvider, FacebookAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import "../styles/login-form.css";
-import { authEmailPath } from "../helpers/authEmailPass";
+import { loginInputValid } from "../helpers/validateInput";
+import { doc, setDoc } from "firebase/firestore";
 
-const LoginForm = ({ setLoggedIn, setUser, registration, setRegistration }) => {
-   const [loginEmail, setLoginEmail] = useState("");
-   const [loginPassword, setLoginPassword] = useState("");
-   const [invalidLogin, setInvalidLogin] = useState("");
+const firebaseErrors = {
+   "Firebase: Error (auth/missing-password).": "Missing password",
+   "Firebase: Error (auth/wrong-password).": "Wrong password",
+   "FirebaseError: Firebase: Error (auth/invalid-email).": "Invalid email",
+};
+
+const LoginForm = ({ setLoggedIn, setUser, regForm, setRegForm }) => {
+   const [email, setEmail] = useState("");
+   const [password, setPassword] = useState("");
+   const [error, setError] = useState("");
 
    const loginWithGoogle = () => {
       signInWithPopup(auth, providerGoogle)
          .then((result) => {
-            // This gives you a Google Access Token. You can use it to access the Google API.
-            const credential = GoogleAuthProvider.credentialFromResult(result);
-            //const token = credential.accessToken;
-            // The signed-in user info.
-            const user = result.user;
-            setUser(user);
-            // IdP data available using getAdditionalUserInfo(result)
-            // ...
+            createUpdateUserData(result.user);
+            setLoggedIn(true);
          })
          .catch((error) => {
-            /* // Handle Errors here.
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            // The email of the user's account used.
-            const email = error.customData.email;
-            // The AuthCredential type that was used.
-            const credential = GoogleAuthProvider.credentialFromError(error);
-            // ... */
+            console.log(error.code);
+            console.log(error.message);
          });
    };
    const loginWithFacebook = () => {
       signInWithPopup(auth, providerFacebook)
          .then((result) => {
-            // The signed-in user info.
-            const user = result.user;
-            setUser(user);
-
-            // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-            const credential = FacebookAuthProvider.credentialFromResult(result);
-            const accessToken = credential.accessToken;
-
-            // IdP data available using getAdditionalUserInfo(result)
-            // ...
+            createUpdateUserData(result.user);
+            setLoggedIn(true);
          })
          .catch((error) => {
-            /*   // Handle Errors here.
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            // The email of the user's account used.
-            const email = error.customData.email;
-            // The AuthCredential type that was used.
-            const credential = FacebookAuthProvider.credentialFromError(error);
-
-            // ... */
+            console.log(error.code);
+            console.log(error.message);
          });
    };
 
    useEffect(() => {
       onAuthStateChanged(auth, (currentUser) => {
-         if (currentUser) setLoggedIn(true);
-         setUser(currentUser);
-         addData(currentUser);
+         //setUser(currentUser);
+         //addData(currentUser);
       });
    }, [setLoggedIn, setUser]);
 
-   const login = async (e) => {
+   const onSubmit = async (e) => {
       e.preventDefault();
 
       const userList = await getData("users");
-      const authCheck = authEmailPath(userList, loginEmail, loginPassword);
-      authCheck !== undefined ? setInvalidLogin(authCheck) : setLoggedIn(true);
+      const logError = loginInputValid(userList, email);
+      if (logError) {
+         setError(logError);
+         return;
+      }
+      try {
+         const user = await signInWithEmailAndPassword(auth, email, password);
+         setUser(user.user);
+         setLoggedIn(true);
+      } catch (error) {
+         const regFirebaseError = firebaseErrors[error.message] || "Something went wrong";
+         setError(regFirebaseError);
+      }
    };
    return (
       <div className="form-container">
-         <Switcher registration={registration} setRegistration={setRegistration} />
-         <Form>
+         <Switcher regForm={regForm} setRegForm={setRegForm} />
+         <Form onSubmit={onSubmit}>
             <input
                className="form-input"
+               id="email"
+               name="email"
                type="email"
                placeholder="Enter email"
                onChange={(e) => {
-                  setLoginEmail(e.target.value);
+                  setEmail(e.target.value);
                }}
             />
             <input
                className="form-input"
+               id="password"
+               name="password"
                type="password"
                placeholder="Password"
                onChange={(e) => {
-                  setLoginPassword(e.target.value);
+                  setPassword(e.target.value);
                }}
             />
-            <div className="alert-error" style={{ opacity: `${invalidLogin !== "" ? "1" : "0"}` }}>
-               {invalidLogin}
+            <div className="alert-error" style={{ opacity: `${error !== "" ? "1" : "0"}` }}>
+               {error}
             </div>
 
-            <Button className="form-btn" type="button" onClick={login}>
+            <Button className="form-btn" type="submit">
                Log In
             </Button>
-
-            <Button className="form-btn" type="button" onClick={loginWithGoogle}>
-               <img src={Google} alt="google icon" className="form-btn-icon-google" />
-               Log In with Google
-            </Button>
-            <Button className="form-btn" type="button" onClick={loginWithFacebook}>
-               <img src={Facebook} alt="facebook icon" className="form-btn-icon-fb" />
-               Log In with Facebook
-            </Button>
          </Form>
+         <Button className="form-btn" type="button" onClick={loginWithGoogle}>
+            <img src={Google} alt="google icon" className="form-btn-icon-google" />
+            Log In with Google
+         </Button>
+         <Button className="form-btn" type="button" onClick={loginWithFacebook}>
+            <img src={Facebook} alt="facebook icon" className="form-btn-icon-fb" />
+            Log In with Facebook
+         </Button>
       </div>
    );
 };

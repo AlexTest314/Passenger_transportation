@@ -38,9 +38,8 @@
 }
 
 .reg-alert-error {
+	text-align: center;
 	height: 1.5rem;
-	margin-top: 0rem;
-	margin-left: 3.1rem;
 	font-size: 14px;
 	color: rgb(165, 53, 53);
 }

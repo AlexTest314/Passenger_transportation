@@ -14,7 +14,7 @@ const Dashboard = ({ user, setUser, setLoggedIn }) => {
    return (
       <div className="dashboard-container">
          <div className="element">
-            <Sidebar signout={signout} user={user} />
+            <Sidebar signout={signout} />
          </div>
          <div className="main">
             <Main user={user} />

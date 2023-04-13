@@ -4,10 +4,10 @@ import LoginForm from "../components/LoginForm";
 import RegistrationFrom from "../components/RegistrationFrom";
 
 const AuthorizationPage = ({ setLoggedIn, setUser }) => {
-   const [registration, setRegistration] = useState(true);
+   const [regForm, setRegForm] = useState(true);
    return (
       <BDiv className="d-flex flex-row justify-content-center align-items-center " style={{ height: "100vh" }}>
-         {registration ? <RegistrationFrom registration={registration} setRegistration={setRegistration} /> : <LoginForm registration={registration} setRegistration={setRegistration} setLoggedIn={setLoggedIn} setUser={setUser} />}
+         {regForm ? <RegistrationFrom regForm={regForm} setRegForm={setRegForm} setLoggedIn={setLoggedIn} setUser={setUser} /> : <LoginForm regForm={regForm} setRegForm={setRegForm} setLoggedIn={setLoggedIn} setUser={setUser} />}
       </BDiv>
    );
 };

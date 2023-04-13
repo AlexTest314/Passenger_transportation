@@ -1,64 +1,71 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Form, Button } from "bootstrap-4-react/lib/components";
 import Switcher from "./Switcher";
 import { auth } from "../helpers/firebase-config";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import checkPassword from "../helpers/checkPassword";
-import checkEmail from "../helpers/checkEmail";
 import "../styles/register-form.css";
+import { getData, createUpdateUserData } from "../helpers/firebase-db";
+import { regInputValid } from "../helpers/validateInput";
 
-const RegistrationFrom = ({ registration, setRegistration }) => {
-   const [registerEmail, setRegisterEmail] = useState("");
-   const [registerPassword, setRegisterPassword] = useState("");
-   const [validPass, setValidPass] = useState(true);
-   const [validEmail, setValidEmail] = useState(true);
+const firebaseErrors = {
+   "Firebase: Error (auth/missing-password).": "Missing password",
+   "Firebase: Error (auth/email-already-in-use).": "Email already in use",
+   "FirebaseError: Firebase: Error (auth/invalid-email).": "Invalid email",
+};
 
-   useEffect(() => {
-      const isValidEmail = checkEmail(registerEmail);
-      const isValidPass = checkPassword(registerPassword);
-      setValidEmail(isValidEmail);
-      setValidPass(isValidPass);
-   }, [registerPassword, registerEmail]);
+const RegistrationFrom = ({ setLoggedIn, setUser, regForm, setRegForm }) => {
+   const [email, setEmail] = useState("");
+   const [password, setPassword] = useState("");
+   const [error, setError] = useState("");
 
-   const register = async (e) => {
+   const onSubmit = async (e) => {
       e.preventDefault();
-      try {
-         await createUserWithEmailAndPassword(auth, registerEmail, registerPassword);
-      } catch (error) {
-         console.log(error.message);
+      const userList = await getData("users");
+      const regError = regInputValid(userList, email, password);
+      if (regError) {
+         setError(regError);
+         return;
       }
-      setRegistration(false);
+
+      try {
+         const user = await createUserWithEmailAndPassword(auth, email, password);
+         createUpdateUserData(user.user);
+         setUser(user.user);
+         setLoggedIn(true);
+      } catch (error) {
+         const regFirebaseError = firebaseErrors[error.message] || "Something went wrong";
+         setError(regFirebaseError);
+      }
    };
 
    return (
       <div className="reg-form-container">
-         <Switcher registration={registration} setRegistration={setRegistration} className="form-switcher" />
-         <Form>
+         <Switcher regForm={regForm} setRegForm={setRegForm} className="form-switcher" />
+         <Form onSubmit={onSubmit}>
             <input
-               className={`reg-form-input ${registerEmail === "" ? "" : validEmail === true ? "valid" : "invalid"}`}
+               className="reg-form-input"
+               id="email"
+               name="email"
                type="email"
                placeholder="Enter email"
                onChange={(e) => {
-                  setRegisterEmail(e.target.value);
+                  setEmail(e.target.value);
                }}
             />
-            <div className="reg-alert-error" style={{ opacity: `${registerEmail === "" ? "0" : validEmail === "0" ? "1" : "1"}` }}>
-               {validEmail.false}
-            </div>
             <input
-               className={`reg-form-input ${registerPassword === "" ? "" : validPass === true ? "valid" : "invalid"}`}
+               className="reg-form-input"
+               id="password"
+               name="password"
                type="password"
                placeholder="Password"
-               onKeyDown={(e) => (e.key === "Enter" ? register : null)}
                onChange={(e) => {
-                  setRegisterPassword(e.target.value);
+                  setPassword(e.target.value);
                }}
             />
-            <div className="reg-alert-error" style={{ opacity: `${registerPassword === "" ? "0" : validPass === "0" ? "1" : "1"}` }}>
-               {validPass.false}
+            <div className="reg-alert-error" style={{ opacity: `${error !== "" ? "1" : "0"}` }}>
+               {error}
             </div>
-            {}
-            <Button className="reg-form-btn" type="button" onClick={register}>
+            <Button className="reg-form-btn" type="sumbit">
                Sign Up
             </Button>
          </Form>
