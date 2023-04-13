@@ -1,16 +1,19 @@
-import { addDoc, collection } from "firebase/firestore";
+import { collection, doc, getDocs, setDoc } from "firebase/firestore";
 import { db } from "./firebase-config";
 
-async function addDB({ email, password }) {
-   try {
-      const docRef = await addDoc(collection(db, "auth/"), {
-         email,
-         password,
-      });
+export const getData = async (users) => {
+   const usersCol = collection(db, users);
+   const userSnapshot = await getDocs(usersCol);
+   const userList = userSnapshot.docs.map((doc) => doc.data());
 
-      console.log("Document written with ID: ", docRef.id);
-   } catch (e) {
-      console.error("Error adding document: ", e);
-   }
-}
-export default addDB;
+   return userList;
+};
+
+export const addData = async (user, pass) => {
+   const email = user.email;
+   const uid = user.uid;
+   await setDoc(doc(db, "users", uid), {
+      email,
+      password: pass,
+   });
+};

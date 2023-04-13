@@ -3,14 +3,15 @@ import { Form, Button } from "bootstrap-4-react/lib/components";
 import Facebook from "../icons/facebook.svg";
 import Google from "../icons/google.svg";
 import Switcher from "./Switcher";
+import { addData, getData } from "../helpers/firebase-db";
 import { auth, providerFacebook, providerGoogle } from "../helpers/firebase-config";
-import { GoogleAuthProvider, FacebookAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signInWithPhoneNumber } from "firebase/auth";
+import { GoogleAuthProvider, FacebookAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import "../styles/login-form.css";
+import { authEmailPath } from "../helpers/authEmailPass";
 
 const LoginForm = ({ setLoggedIn, setUser, registration, setRegistration }) => {
    const [loginEmail, setLoginEmail] = useState("");
    const [loginPassword, setLoginPassword] = useState("");
-   //const [loginPhoneNumber, setLoginPhoneNumber] = useState("");
    const [invalidLogin, setInvalidLogin] = useState("");
 
    const loginWithGoogle = () => {
@@ -18,7 +19,7 @@ const LoginForm = ({ setLoggedIn, setUser, registration, setRegistration }) => {
          .then((result) => {
             // This gives you a Google Access Token. You can use it to access the Google API.
             const credential = GoogleAuthProvider.credentialFromResult(result);
-            const token = credential.accessToken;
+            //const token = credential.accessToken;
             // The signed-in user info.
             const user = result.user;
             setUser(user);
@@ -63,40 +64,20 @@ const LoginForm = ({ setLoggedIn, setUser, registration, setRegistration }) => {
          });
    };
 
-   const loginWithPhone = () => {
-      /* const phoneNumber = loginPhoneNumber;
-      const appVerifier = recaptcha;
-
-      signInWithPhoneNumber(auth, phoneNumber, appVerifier)
-         .then((confirmationResult) => {
-            // SMS sent. Prompt user to type the code from the message, then sign the
-            // user in with confirmationResult.confirm(code).
-            window.confirmationResult = confirmationResult;
-            // ...
-         })
-         .catch((error) => {
-            // Error; SMS not sent
-            // ...
-         }); */
-   };
    useEffect(() => {
       onAuthStateChanged(auth, (currentUser) => {
          if (currentUser) setLoggedIn(true);
          setUser(currentUser);
+         addData(currentUser);
       });
    }, [setLoggedIn, setUser]);
 
    const login = async (e) => {
       e.preventDefault();
-      try {
-         const user = await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
 
-         console.log(user);
-      } catch (error) {
-         return error.message === "Firebase: Error (auth/invalid-email)." ? setInvalidLogin("Invalid email") : error.message === "Firebase: Error (auth/user-not-found)." ? setInvalidLogin("User not found") : error.message === "Firebase: Error (auth/wrong-password)." ? setInvalidLogin("Wrong password") : "";
-
-         console.log(error.message);
-      }
+      const userList = await getData("users");
+      const authCheck = authEmailPath(userList, loginEmail, loginPassword);
+      authCheck !== undefined ? setInvalidLogin(authCheck) : setLoggedIn(true);
    };
    return (
       <div className="form-container">
@@ -125,6 +106,7 @@ const LoginForm = ({ setLoggedIn, setUser, registration, setRegistration }) => {
             <Button className="form-btn" type="button" onClick={login}>
                Log In
             </Button>
+
             <Button className="form-btn" type="button" onClick={loginWithGoogle}>
                <img src={Google} alt="google icon" className="form-btn-icon-google" />
                Log In with Google

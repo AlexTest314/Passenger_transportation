@@ -6,14 +6,12 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import checkPassword from "../helpers/checkPassword";
 import checkEmail from "../helpers/checkEmail";
 import "../styles/register-form.css";
-import addDB from "../helpers/firebase-db";
 
 const RegistrationFrom = ({ registration, setRegistration }) => {
    const [registerEmail, setRegisterEmail] = useState("");
    const [registerPassword, setRegisterPassword] = useState("");
    const [validPass, setValidPass] = useState(true);
    const [validEmail, setValidEmail] = useState(true);
-   //const [registered, setRegistered] = useState();
 
    useEffect(() => {
       const isValidEmail = checkEmail(registerEmail);
@@ -22,19 +20,16 @@ const RegistrationFrom = ({ registration, setRegistration }) => {
       setValidPass(isValidPass);
    }, [registerPassword, registerEmail]);
 
-   const register = (e) => {
+   const register = async (e) => {
       e.preventDefault();
-      addDB(registerEmail, registerPassword);
       try {
-         createUserWithEmailAndPassword(auth, registerEmail, registerPassword).then((user) => {});
-
-         // if (user) setRegistered(true);
+         await createUserWithEmailAndPassword(auth, registerEmail, registerPassword);
       } catch (error) {
          console.log(error.message);
       }
-
       setRegistration(false);
    };
+
    return (
       <div className="reg-form-container">
          <Switcher registration={registration} setRegistration={setRegistration} className="form-switcher" />
@@ -54,6 +49,7 @@ const RegistrationFrom = ({ registration, setRegistration }) => {
                className={`reg-form-input ${registerPassword === "" ? "" : validPass === true ? "valid" : "invalid"}`}
                type="password"
                placeholder="Password"
+               onKeyDown={(e) => (e.key === "Enter" ? register : null)}
                onChange={(e) => {
                   setRegisterPassword(e.target.value);
                }}
@@ -62,7 +58,7 @@ const RegistrationFrom = ({ registration, setRegistration }) => {
                {validPass.false}
             </div>
             {}
-            <Button className="reg-form-btn" type="button" onKeyDown={(e) => (e.key === "Enter" ? register : null)} onClick={register}>
+            <Button className="reg-form-btn" type="button" onClick={register}>
                Sign Up
             </Button>
          </Form>
