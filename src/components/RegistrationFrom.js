@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { BDiv } from "bootstrap-4-react";
 import { Form, Button } from "bootstrap-4-react/lib/components";
 import Switcher from "./Switcher";
 import { auth } from "../helpers/firebase-config";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { Alert } from "bootstrap-4-react";
 import checkPassword from "../helpers/checkPassword";
 import checkEmail from "../helpers/checkEmail";
+import "../styles/register-form.css";
 
 const RegistrationFrom = ({ registration, setRegistration }) => {
    const [registerEmail, setRegisterEmail] = useState("");
@@ -36,38 +35,37 @@ const RegistrationFrom = ({ registration, setRegistration }) => {
       setRegistration(false);
    };
    return (
-      <BDiv className="bg-info mx-auto w-25 rounded">
-         <Switcher registration={registration} setRegistration={setRegistration} />
-         <Form className="m-3 ">
-            <Form.Group>
-               <Form.Input
-                  bg={registerEmail === "" ? "" : validEmail === true ? "success" : "danger"}
-                  type="email"
-                  placeholder="Enter email"
-                  onChange={(e) => {
-                     setRegisterEmail(e.target.value);
-                  }}
-               />
-               {registerEmail === "" ? null : validEmail === true ? null : <Alert danger>{validEmail.false}</Alert>}
-            </Form.Group>
-            <Form.Group>
-               <Form.Input
-                  bg={registerPassword === "" ? "" : validPass === true ? "success" : "danger"}
-                  type="password"
-                  placeholder="Password"
-                  onChange={(e) => {
-                     setRegisterPassword(e.target.value);
-                  }}
-               />
-               {registerPassword === "" ? null : validPass === true ? null : <Alert danger>{validPass.false}</Alert>}
-            </Form.Group>
-            <Form.Group></Form.Group>
-            <Button className="btn-primary w-100" type="button" onClick={register}>
+      <div className="form-container">
+         <Switcher registration={registration} setRegistration={setRegistration} className="form-switcher" />
+         <Form>
+            <input
+               className={`reg-form-input ${registerEmail === "" ? "" : validEmail === true ? "valid" : "invalid"}`}
+               type="email"
+               placeholder="Enter email"
+               onChange={(e) => {
+                  setRegisterEmail(e.target.value);
+               }}
+            />
+            <div className="alert-error" style={{ opacity: `${registerEmail === "" ? "0" : validEmail === "0" ? "1" : "1"}` }}>
+               {validEmail.false}
+            </div>
+            <input
+               className={`form-input ${registerPassword === "" ? "" : validPass === true ? "valid" : "invalid"}`}
+               type="password"
+               placeholder="Password"
+               onChange={(e) => {
+                  setRegisterPassword(e.target.value);
+               }}
+            />
+            <div className="alert-error" style={{ opacity: `${registerPassword === "" ? "0" : validPass === "0" ? "1" : "1"}` }}>
+               {validPass.false}
+            </div>
+            {}
+            <Button className="form-btn" type="button" onClick={register}>
                Sign Up
             </Button>
-            {registered ? <Alert success>Your have already registered!</Alert> : null}
          </Form>
-      </BDiv>
+      </div>
    );
 };
 

@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { BDiv } from "bootstrap-4-react";
 import { Form, Button } from "bootstrap-4-react/lib/components";
 import Switcher from "./Switcher";
 import { auth, providerFacebook, providerGoogle } from "../helpers/firebase-config";
-import { GoogleAuthProvider, FacebookAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
-import { Alert } from "bootstrap-4-react";
+import { GoogleAuthProvider, FacebookAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signInWithPhoneNumber } from "firebase/auth";
+import "../styles/login-form.css";
 
 const LoginForm = ({ setLoggedIn, setUser, registration, setRegistration }) => {
    const [loginEmail, setLoginEmail] = useState("");
    const [loginPassword, setLoginPassword] = useState("");
+   //const [loginPhoneNumber, setLoginPhoneNumber] = useState("");
    const [invalidLogin, setInvalidLogin] = useState("");
 
    const loginWithGoogle = () => {
@@ -60,6 +60,23 @@ const LoginForm = ({ setLoggedIn, setUser, registration, setRegistration }) => {
             // ...
          });
    };
+
+   const loginWithPhone = () => {
+      /* const phoneNumber = loginPhoneNumber;
+      const appVerifier = recaptcha;
+
+      signInWithPhoneNumber(auth, phoneNumber, appVerifier)
+         .then((confirmationResult) => {
+            // SMS sent. Prompt user to type the code from the message, then sign the
+            // user in with confirmationResult.confirm(code).
+            window.confirmationResult = confirmationResult;
+            // ...
+         })
+         .catch((error) => {
+            // Error; SMS not sent
+            // ...
+         }); */
+   };
    useEffect(() => {
       onAuthStateChanged(auth, (currentUser) => {
          if (currentUser) setLoggedIn(true);
@@ -74,39 +91,40 @@ const LoginForm = ({ setLoggedIn, setUser, registration, setRegistration }) => {
 
          console.log(user);
       } catch (error) {
-         setInvalidLogin(error.message);
+         return error.message === "Firebase: Error (auth/invalid-email)." ? setInvalidLogin("Invalid email") : error.message === "Firebase: Error (auth/user-not-found)." ? setInvalidLogin("User not found") : error.message === "Firebase: Error (auth/wrong-password)." ? setInvalidLogin("Wrong password") : "";
+
          console.log(error.message);
       }
    };
    return (
-      <BDiv className="bg-info mx-auto w-25 rounded">
+      <div className="form-container">
          <Switcher registration={registration} setRegistration={setRegistration} />
-         <Form className="m-3 ">
-            <Form.Group>
-               <Form.Input
-                  type="email"
-                  placeholder="Enter email"
-                  onChange={(e) => {
-                     setLoginEmail(e.target.value);
-                  }}
-               />
-            </Form.Group>
-            <Form.Group>
-               <Form.Input
-                  type="password"
-                  placeholder="Password"
-                  onChange={(e) => {
-                     setLoginPassword(e.target.value);
-                  }}
-               />
-               {invalidLogin !== "" ? <Alert danger>{invalidLogin}</Alert> : null}
-            </Form.Group>
+         <Form>
+            <input
+               className="form-input"
+               type="email"
+               placeholder="Enter email"
+               onChange={(e) => {
+                  setLoginEmail(e.target.value);
+               }}
+            />
+            <input
+               className="form-input"
+               type="password"
+               placeholder="Password"
+               onChange={(e) => {
+                  setLoginPassword(e.target.value);
+               }}
+            />
+            <div className="alert-error" style={{ opacity: `${invalidLogin !== "" ? "1" : "0"}` }}>
+               {invalidLogin}
+            </div>
 
-            <Button className="btn-primary w-100" type="button" onClick={login}>
+            <Button className="form-btn" type="button" onClick={login}>
                Log In
             </Button>
-            <Button className="btn-primary w-100 mt-3" type="button" onClick={loginWithGoogle}>
-               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24px" height="24px">
+            <Button className="form-btn" type="button" onClick={loginWithGoogle}>
+               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24px" height="24px" className="form-btn-icon-google">
                   <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
                   <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853" />
                   <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05" />
@@ -115,15 +133,15 @@ const LoginForm = ({ setLoggedIn, setUser, registration, setRegistration }) => {
                </svg>
                Log In with Google
             </Button>
-            <Button className="btn-primary w-100 mt-3" type="button" onClick={loginWithFacebook}>
-               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="24px" height="24px">
+            <Button className="form-btn" type="button" onClick={loginWithFacebook}>
+               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="24px" height="24px" className="form-btn-icon-fb">
                   <path fill="#039be5" d="M24 5A19 19 0 1 0 24 43A19 19 0 1 0 24 5Z" />
                   <path fill="#fff" d="M26.572,29.036h4.917l0.772-4.995h-5.69v-2.73c0-2.075,0.678-3.915,2.619-3.915h3.119v-4.359c-0.548-0.074-1.707-0.236-3.897-0.236c-4.573,0-7.254,2.415-7.254,7.917v3.323h-4.701v4.995h4.701v13.729C22.089,42.905,23.032,43,24,43c0.875,0,1.729-0.08,2.572-0.194V29.036z" />
                </svg>
                Log In with Facebook
             </Button>
          </Form>
-      </BDiv>
+      </div>
    );
 };
 

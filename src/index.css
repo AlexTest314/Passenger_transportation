@@ -5,6 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: url(./img/jp-valery-x24XBcWfY3g-unsplash.jpg);
+  background-size: cover;
 }
 
 code {

@@ -1,8 +1,9 @@
 import React from "react";
-import { BDiv } from "bootstrap-4-react";
-import { Button } from "bootstrap-4-react/lib/components";
 import { signOut } from "firebase/auth";
 import { auth } from "../helpers/firebase-config";
+import "../styles/dashboard.css";
+import Sidebar from "../components/Sidebar";
+import Main from "../components/Main";
 
 const Dashboard = ({ user, setUser, setLoggedIn }) => {
    const signout = async () => {
@@ -11,12 +12,10 @@ const Dashboard = ({ user, setUser, setLoggedIn }) => {
       setLoggedIn(false);
    };
    return (
-      <BDiv>
-         <BDiv>{user.email}</BDiv>
-         <Button className="btn-primary" onClick={signout}>
-            Sign Out
-         </Button>
-      </BDiv>
+      <div>
+         <Sidebar signout={signout} user={user} />
+         <Main />
+      </div>
    );
 };
 
