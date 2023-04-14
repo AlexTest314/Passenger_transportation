@@ -1,4 +1,4 @@
-.security-container {
+.settings-container {
 	background-color: rgba(108, 117, 125, 0.5);
 	border-radius: 1rem;
 	width: 40rem ;
@@ -9,21 +9,21 @@
 	align-items: center;
 	}
 
-	.security-item {
+	.settings-item {
 		margin: 1rem;
 		flex: 1;
 		display: flex;
 		align-items: center;
 	}
 
-	.security-item-label {
+	.settings-item-label {
 		width: 8rem;
 		color: lightgray;
 	}
-	.security-item:first-child {
+	.settings-item:first-child {
 		margin-top: 2rem;
 	}
-	.security-item-input {
+	.settings-item-input {
 		padding-left: 1rem;
 	width: 20rem;
 	height: 2rem;
@@ -33,13 +33,13 @@
 	margin: 0rem 0rem 1rem 1rem;
 	}
 	
-	.security-item-btn {
+	.settings-item-btn {
 		align-self: center;
 		margin: 0rem 3rem 2rem 12rem;
 		width: 20rem;
 	}
 
-	.security-alert-succ{
+	.settings-alert-succ{
 		text-align: center;
 		margin-left: 9rem;
 		height: 1.5rem;
@@ -47,7 +47,7 @@
 		color: rgb(62, 165, 53);
 	}
 
-	.security-alert-error{
+	.settings-alert-error{
 		text-align: center;
 		margin-left: 9rem;
 		height: 1.5rem;

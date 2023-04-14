@@ -1,15 +1,37 @@
-export const loginInputValid = (users, email) => {
-   const emailCheck = users.filter((user) => user.email === email);
-   if (emailCheck.length === 0) return `Not found user: ${email}`;
+import { getData } from "./firebase-db";
+
+const emailCheck = async (email) => {
+   const userList = await getData("auth", "users");
+   if (!userList) {
+      return false;
+   }
+
+   const usersEmails = Object.values(userList).map((user) => {
+      const parsedUser = JSON.parse(user);
+      const userEmail = parsedUser.email;
+      return userEmail;
+   });
+
+   const hasEmail = usersEmails.some((userEmail) => userEmail === email);
+
+   return hasEmail;
+};
+
+export const loginInputValid = async (email) => {
+   const invalidEmail = await emailCheck(email);
+   if (!invalidEmail) return `Not found user: ${email}`;
    return null;
 };
-export const regInputValid = (users, email, password) => {
+
+export const regInputValid = async (email, password) => {
    const emailTest = /^\S+@\S+\.\S+$/;
    const moreSix = /.{6,}/g;
-   const emailCheck = users.filter((user) => user.email === email);
+   const invalidEmail = await emailCheck(email);
 
    if (!emailTest.test(email)) return `Invalid email`;
-   if (emailCheck.length > 0) return `Email: ${email} already in use`;
-   if (!moreSix.test(password)) return `Password should be at least 6 characters`;
+   if (invalidEmail) return `Email: ${email} already in use`;
+   if (!moreSix.test(password))
+      return `Password should be at least 6 characters`;
    return null;
 };
+

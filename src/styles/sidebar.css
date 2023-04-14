@@ -3,7 +3,7 @@
 	flex-direction: column;
 	justify-content: space-between;
 	background-color: rgba(108, 117, 125, 0.5);
-	width: 15rem;
+	width: 8rem;
 	margin-left: 0rem;
 	height: 100vh;
 }
@@ -12,49 +12,52 @@
 	flex-direction: column;
 	justify-content: space-between;
 	background-color: rgba(108, 117, 125, 0.5);
-	width: 5rem;
+	width: 3rem;
 	height: 100vh;
 }
 
 .sidebar-btn {
-	padding: 0;
+	padding:0rem;
 	background: rgba(108, 117, 125,0);
 }
 
 .sidebar-icon {
-	margin-top: 1rem;
-	margin-left: 1.5rem;
+	height: 20px;
+	width: 20px;
 }
 
 
 .sidebar-section {
+	color :#ffc107;
+	padding: 0;
 	background-color: rgba(108, 117, 125, 0);
 }
 
 .sidebar-section.selected {
+	padding: 0;
 	background-color: rgba(108, 117, 125, 1);
 }
 
 .sidebar-signout-btn-close {
- margin-left: 0.5rem;
+ margin-left: 0.2rem;
  margin-bottom: 0.5rem;
- width: 4rem;
+ width: 2.5rem;
 }
 
 
 .sidebar-humburger-stick {
-	background: gray;
-	margin: 0.5rem;
+	background: #ffc107;
+	margin-top: 0.3rem;
+	margin-left: 0.5rem;
+	margin-bottom: 0.3rem;
 	border-radius: 1rem;
-	height: 0.5rem;
-	width: 4rem;
+	height: 0.3rem;
+	width: 2rem;
 }
 .user {
 	margin: 1rem 2rem;
 }
 
 .sidebar-signout-btn {
-	margin-left: 2rem;
-	margin-right: 2rem;
-	margin-bottom: 0.5rem;
+	margin: 1rem;
 }

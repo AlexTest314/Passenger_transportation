@@ -3,10 +3,6 @@ import { Button } from "bootstrap-4-react/lib/components";
 import "../styles/switcher-form.css";
 
 const Switcher = ({ regForm, setRegForm }) => {
-   const switcher = () => {
-      setRegForm(!regForm);
-   };
-
    return (
       <div className="switch-container">
          <Button
@@ -15,7 +11,7 @@ const Switcher = ({ regForm, setRegForm }) => {
                regForm ? "outline-" : ""
             }info`}
             active
-            onClick={switcher}
+            onClick={() => setRegForm(true)}
          >
             Registration
          </Button>
@@ -25,7 +21,7 @@ const Switcher = ({ regForm, setRegForm }) => {
                regForm ? "" : "outline-"
             }info`}
             active
-            onClick={switcher}
+            onClick={() => setRegForm(false)}
          >
             Login
          </Button>

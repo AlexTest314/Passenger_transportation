@@ -1,0 +1,12 @@
+.table-header {
+	height: 5rem;
+		border-bottom: solid 2px black;
+		display: flex;
+		width: 75rem;
+		align-items: center;
+	}
+
+.table-header-item {
+	flex: 1;
+	text-align: center;
+}

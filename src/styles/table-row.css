@@ -1,0 +1,26 @@
+.table-main {
+	flex: 1;
+}	
+
+.table-row {
+	height: 2rem;
+	border-bottom: solid 2px black;
+		display: flex;
+		width: 75rem;
+		align-items: center;
+}
+
+.table-row-item {
+	flex: 1;
+	text-align: center;
+}
+
+.agree-edit-btn {
+	background: green;
+	height: 1.4rem;
+}
+.cancel-edit-btn {
+	background: red;
+	height: 1.4rem;
+}
+

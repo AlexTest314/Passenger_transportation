@@ -25,7 +25,16 @@
 	.profile-item-input {
 		padding-left: 1rem;
 	width: 25rem;
-	height: 2rem;
+	height: 2rem; 
+	border-radius: 5px;
+	outline: none;
+	border: none;
+	margin: 1rem 0rem 1rem 1rem;
+	}
+	.profile-item-select {
+		padding-left: 1rem;
+	width: 25rem;
+	height: 2rem; 
 	border-radius: 5px;
 	outline: none;
 	border: none;
@@ -39,16 +48,18 @@
 
 	.profile-alert-succ{
 		text-align: center;
-		margin-left: 5rem;
+		margin-left: 6rem;
 		height: 1.5rem;
 		font-size: 14px;
 		color: rgb(62, 165, 53);
 	}
 	
-	.security-alert-error{
+	.profile-alert-error{
 		text-align: center;
-		margin-left: 9rem;
+		margin-left: 6rem;
 		height: 1.5rem;
 		font-size: 14px;
 		color:  rgb(165, 53, 53);
 	}
+
+	

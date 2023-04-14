@@ -1,5 +1,9 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, FacebookAuthProvider, RecaptchaVerifier } from "firebase/auth";
+import {
+   getAuth,
+   GoogleAuthProvider,
+   FacebookAuthProvider,
+} from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -16,7 +20,12 @@ const app = initializeApp(firebaseConfig);
 
 export const auth = getAuth(app);
 export const db = getFirestore(app);
-export const providerGoogle = new GoogleAuthProvider();
+const providerGoogle = new GoogleAuthProvider();
 providerGoogle.addScope("https://www.googleapis.com/auth/contacts.readonly");
-export const providerFacebook = new FacebookAuthProvider();
+const providerFacebook = new FacebookAuthProvider();
 providerFacebook.addScope("user_birthday");
+
+export const providers = {
+   google: providerGoogle,
+   facebook: providerFacebook,
+};

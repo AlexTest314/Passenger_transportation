@@ -3,12 +3,8 @@ import { Form, Button } from "bootstrap-4-react/lib/components";
 import Facebook from "../icons/facebook.svg";
 import Google from "../icons/google.svg";
 import Switcher from "./Switcher";
-import { createUpdateUserData, getData } from "../helpers/firebase-db";
-import {
-   auth,
-   providerFacebook,
-   providerGoogle,
-} from "../helpers/firebase-config";
+import { getData } from "../helpers/firebase-db";
+import { auth, providers } from "../helpers/firebase-config";
 import {
    onAuthStateChanged,
    signInWithEmailAndPassword,
@@ -28,32 +24,27 @@ const LoginForm = ({ setLoggedIn, setUser, regForm, setRegForm }) => {
    const [password, setPassword] = useState("");
    const [error, setError] = useState("");
 
-   const loginWithGoogle = () => {
-      signInWithPopup(auth, providerGoogle)
+   const loginWithProvider = (providerName) => {
+      signInWithPopup(auth, providers[providerName])
          .then((result) => {
-            createUpdateUserData(result.user);
             setLoggedIn(true);
          })
          .catch((error) => {
-            console.log(error.code);
-            console.log(error.message);
-         });
-   };
-   const loginWithFacebook = () => {
-      signInWithPopup(auth, providerFacebook)
-         .then((result) => {
-            createUpdateUserData(result.user);
-            setLoggedIn(true);
-         })
-         .catch((error) => {
-            console.log(error.code);
-            console.log(error.message);
+            const logFirebaseError =
+               firebaseErrors[error.message] || "Something went wrong";
+            setError(logFirebaseError);
          });
    };
 
    useEffect(() => {
-      onAuthStateChanged(auth, (currentUser) => {
-         setUser(currentUser);
+      onAuthStateChanged(auth, async (currentUser) => {
+         if (currentUser) {
+            const id = currentUser.uid;
+            const data = await getData("auth", "users");
+            const user = JSON.parse(data[id]);
+            setUser(user);
+         }
+
          if (currentUser) setLoggedIn(true);
       });
    }, [setLoggedIn, setUser]);
@@ -61,8 +52,7 @@ const LoginForm = ({ setLoggedIn, setUser, regForm, setRegForm }) => {
    const onSubmit = async (e) => {
       e.preventDefault();
 
-      const userList = await getData("users");
-      const logError = loginInputValid(userList, email);
+      const logError = await loginInputValid(email);
       if (logError) {
          setError(logError);
          return;
@@ -112,7 +102,11 @@ const LoginForm = ({ setLoggedIn, setUser, regForm, setRegForm }) => {
                Log In
             </Button>
          </Form>
-         <Button className="form-btn" type="button" onClick={loginWithGoogle}>
+         <Button
+            className="form-btn"
+            type="button"
+            onClick={() => loginWithProvider("google")}
+         >
             <img
                src={Google}
                alt="google icon"
@@ -120,7 +114,11 @@ const LoginForm = ({ setLoggedIn, setUser, regForm, setRegForm }) => {
             />
             Log In with Google
          </Button>
-         <Button className="form-btn" type="button" onClick={loginWithFacebook}>
+         <Button
+            className="form-btn"
+            type="button"
+            onClick={() => loginWithProvider("facebook")}
+         >
             <img
                src={Facebook}
                alt="facebook icon"

@@ -1,49 +1,40 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Form, Button } from "bootstrap-4-react/lib/components";
 import "../styles/profile.css";
 import { createUpdateUserData } from "../helpers/firebase-db";
+import { validateUser } from "../helpers/validateUser";
 
-const initialUser = {
-   uid: "",
-   email: "",
-   displayName: "",
-   gender: "Male",
+const firebaseErrors = {
+   "Eror: Invalid user Id": "Invalid user Id",
+};
+const aditionalFields = {
+   gender: "",
    age: "",
-   phoneNumber: "",
 };
 const Profile = ({ user }) => {
-   const [userInfo, setUserInfo] = useState(initialUser);
+   const [userInfo, setUserInfo] = useState({ ...aditionalFields, ...user });
    const [success, setSuccess] = useState("");
    const [error, setError] = useState("");
-
-   useEffect(() => {
-      setUserInfo({
-         ...userInfo,
-         uid: user.uid,
-         email: user.email,
-      });
-   }, [user]);
-
    const onSubmit = async (e) => {
       e.preventDefault();
-      userInfo.displayName === ""
-         ? setError("Name is empty")
-         : userInfo.age === ""
-         ? setError("Age is empty")
-         : userInfo.phoneNumber === ""
-         ? setError("Phone number is empty")
-         : setSuccess("Your information was updated");
+      console.log("userInfo", userInfo);
+      const updateError = validateUser(userInfo);
+      console.log("updateError", updateError);
+      if (updateError) {
+         setError(updateError);
+         setSuccess("");
+         return;
+      }
 
-      createUpdateUserData(userInfo);
-      if (success !== "") {
-         setUserInfo({
-            uid: user.uid,
-            email: user.email,
-            displayName: "",
-            gender: "Male",
-            age: "",
-            phoneNumber: "",
-         });
+      try {
+         createUpdateUserData(userInfo);
+         setError("");
+         setSuccess("Your information was updated");
+      } catch (error) {
+         const updateFirebaseError =
+            firebaseErrors[error.message] || "Something went wrong";
+         setError(updateFirebaseError);
+         setSuccess("");
       }
    };
 
@@ -80,20 +71,19 @@ const Profile = ({ user }) => {
             </div>
             <div className="profile-item">
                <label className="profile-item-label">Gender</label>
-               <Form.Select
+               <select
                   className="profile-item-input"
                   id="gender"
                   name="gender"
                   type="text"
                   value={userInfo.gender}
-                  placeholder="Enter gender"
                   onChange={(e) =>
                      setUserInfo({ ...userInfo, gender: e.target.value })
                   }
                >
                   <option>Male</option>
                   <option>Female</option>
-               </Form.Select>
+               </select>
             </div>
             <div className="profile-item">
                <label className="profile-item-label">Age</label>
@@ -124,9 +114,9 @@ const Profile = ({ user }) => {
                />
             </div>
             <div
-               className={`security-alert-${error ? "error" : "succ"}`}
+               className={`profile-alert-${error ? "error" : "succ"}`}
                style={{
-                  opacity: `${error !== "" || success !== "" ? "1" : "0"}`,
+                  opacity: `${error || success ? "1" : "0"}`,
                }}
             >
                {error ? error : success}

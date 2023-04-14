@@ -3,12 +3,13 @@ import "../styles/sidebar.css";
 import { Button } from "bootstrap-4-react/lib/components";
 
 import Settings from "../icons/sidebar-settings.svg";
+import Users from "../icons/sidebar-users.svg";
 import Profile from "../icons/sidebar-profile.svg";
 import Arrow from "../icons/sidebar-arrow.svg";
 import Trip from "../icons/trip.svg";
 import LogOut from "../icons/sidebar-log-out.svg";
 
-const Sidebar = ({ signout, user, section, setSection }) => {
+const AdminSidebar = ({ signout, user, section, setSection }) => {
    const [isOpen, setIsOpen] = useState(false);
 
    const hanleHumb = () => {
@@ -23,6 +24,14 @@ const Sidebar = ({ signout, user, section, setSection }) => {
                onClick={hanleHumb}
             >
                <img src={Arrow} className="sidebar-icon" alt="arrow-icon" />
+            </Button>
+            <Button
+               className={`shadow-none mb-0 border-0 rounded-0 w-100 sidebar-section ${
+                  section === "Users" ? "selected" : ""
+               }`}
+               onClick={() => setSection("Users")}
+            >
+               Users editing
             </Button>
             <Button
                className={`shadow-none mb-0 border-0 rounded-0 w-100 sidebar-section ${
@@ -50,7 +59,7 @@ const Sidebar = ({ signout, user, section, setSection }) => {
             </Button>
          </div>
          {/* <div className="user">{user.email}</div> */}
-         <Button className="btn-primary sidebar-signout-btn" onClick={signout}>
+         <Button className="btn-warning sidebar-signout-btn" onClick={signout}>
             Sign Out
          </Button>
       </div>
@@ -59,7 +68,7 @@ const Sidebar = ({ signout, user, section, setSection }) => {
          <div>
             <Button
                type="button"
-               className="sidebar-btn p-0 rounded-0 shadow-none border-0"
+               className="sidebar-btn  p-0 rounded-0 shadow-none border-0"
                onClick={hanleHumb}
             >
                <div className="sidebar-humburger-stick"></div>
@@ -67,7 +76,15 @@ const Sidebar = ({ signout, user, section, setSection }) => {
                <div className="sidebar-humburger-stick"></div>
             </Button>
             <Button
-               className={`shadow-none mb-0 border-0 rounded-0 w-100 sidebar-section ${
+               className={`shadow-none mb-2 p-0 border-0 rounded-0 w-100 sidebar-section ${
+                  section === "Users" ? "selected" : ""
+               }`}
+               onClick={() => setSection("Users")}
+            >
+               <img src={Users} alt="users-icon" />
+            </Button>
+            <Button
+               className={`shadow-none mb-2 p-0 border-0 rounded-0 w-100 sidebar-section ${
                   section === "Trips" ? "selected" : ""
                }`}
                onClick={() => setSection("Trips")}
@@ -75,7 +92,7 @@ const Sidebar = ({ signout, user, section, setSection }) => {
                <img src={Trip} className="sidebar-icon-close" alt="trip-icon" />
             </Button>
             <Button
-               className={`shadow-none mb-0 border-0 rounded-0 w-100 sidebar-section ${
+               className={`shadow-none mb-2 p-0 border-0 rounded-0 w-100 sidebar-section ${
                   section === "Profile" ? "selected" : ""
                }`}
                onClick={() => setSection("Profile")}
@@ -83,7 +100,7 @@ const Sidebar = ({ signout, user, section, setSection }) => {
                <img src={Profile} alt="profile-icon" />
             </Button>
             <Button
-               className={`shadow-none mb-0 border-0 rounded-0 w-100 sidebar-section ${
+               className={`shadow-none mb-2 p-0 border-0 rounded-0 w-100 sidebar-section ${
                   section === "Settings" ? "selected" : ""
                }`}
                onClick={() => setSection("Settings")}
@@ -92,14 +109,14 @@ const Sidebar = ({ signout, user, section, setSection }) => {
             </Button>
          </div>
          <Button
-            className="btn-primary sidebar-signout-btn-close"
+            className="btn-warning w-0 p-0 border-0 sidebar-signout-btn-close"
             onClick={signout}
          >
-            <img src={LogOut} alt="logout-icon" />
+            <img src={LogOut} alt="logout-icon" className="sidebar-icon" />
          </Button>
       </div>
    );
 };
 
-export default Sidebar;
+export default AdminSidebar;
 
