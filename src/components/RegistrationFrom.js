@@ -28,19 +28,28 @@ const RegistrationFrom = ({ setLoggedIn, setUser, regForm, setRegForm }) => {
       }
 
       try {
-         const user = await createUserWithEmailAndPassword(auth, email, password);
+         const user = await createUserWithEmailAndPassword(
+            auth,
+            email,
+            password
+         );
          createUpdateUserData(user.user);
          setUser(user.user);
          setLoggedIn(true);
       } catch (error) {
-         const regFirebaseError = firebaseErrors[error.message] || "Something went wrong";
+         const regFirebaseError =
+            firebaseErrors[error.message] || "Something went wrong";
          setError(regFirebaseError);
       }
    };
 
    return (
       <div className="reg-form-container">
-         <Switcher regForm={regForm} setRegForm={setRegForm} className="form-switcher" />
+         <Switcher
+            regForm={regForm}
+            setRegForm={setRegForm}
+            className="form-switcher"
+         />
          <Form onSubmit={onSubmit}>
             <input
                className="reg-form-input"
@@ -62,7 +71,10 @@ const RegistrationFrom = ({ setLoggedIn, setUser, regForm, setRegForm }) => {
                   setPassword(e.target.value);
                }}
             />
-            <div className="reg-alert-error" style={{ opacity: `${error !== "" ? "1" : "0"}` }}>
+            <div
+               className="reg-alert-error"
+               style={{ opacity: `${error !== "" ? "1" : "0"}` }}
+            >
                {error}
             </div>
             <Button className="reg-form-btn" type="sumbit">
@@ -74,3 +86,4 @@ const RegistrationFrom = ({ setLoggedIn, setUser, regForm, setRegForm }) => {
 };
 
 export default RegistrationFrom;
+

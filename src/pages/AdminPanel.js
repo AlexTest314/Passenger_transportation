@@ -4,16 +4,23 @@ import { BDiv } from "bootstrap-4-react";
 import { auth } from "../helpers/firebase-config";
 import { Button } from "bootstrap-4-react/lib/components";
 
-const AdminPanel = ({ user, setLoggedIn, setUser }) => {
+const AdminPanel = ({ user, setLoggedIn }) => {
    auth
-      .getUsers([{ uid: "uid1" }, { email: "user2@example.com" }, { phoneNumber: "+15555550003" }, { providerId: "google.com", providerUid: "google_uid4" }])
+      .getUsers([
+         { uid: "uid1" },
+         { email: "user2@example.com" },
+         { phoneNumber: "+15555550003" },
+         { providerId: "google.com", providerUid: "google_uid4" },
+      ])
       .then((getUsersResult) => {
          console.log("Successfully fetched user data:");
          getUsersResult.users.forEach((userRecord) => {
             console.log(userRecord);
          });
 
-         console.log("Unable to find users corresponding to these identifiers:");
+         console.log(
+            "Unable to find users corresponding to these identifiers:"
+         );
          getUsersResult.notFound.forEach((userIdentifier) => {
             console.log(userIdentifier);
          });
@@ -23,7 +30,6 @@ const AdminPanel = ({ user, setLoggedIn, setUser }) => {
       });
    const signout = async () => {
       await signOut(auth);
-      setUser({});
       setLoggedIn(false);
    };
    return (
@@ -37,3 +43,4 @@ const AdminPanel = ({ user, setLoggedIn, setUser }) => {
 };
 
 export default AdminPanel;
+

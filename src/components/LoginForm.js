@@ -4,11 +4,18 @@ import Facebook from "../icons/facebook.svg";
 import Google from "../icons/google.svg";
 import Switcher from "./Switcher";
 import { createUpdateUserData, getData } from "../helpers/firebase-db";
-import { auth, db, providerFacebook, providerGoogle } from "../helpers/firebase-config";
-import { GoogleAuthProvider, FacebookAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import {
+   auth,
+   providerFacebook,
+   providerGoogle,
+} from "../helpers/firebase-config";
+import {
+   onAuthStateChanged,
+   signInWithEmailAndPassword,
+   signInWithPopup,
+} from "firebase/auth";
 import "../styles/login-form.css";
 import { loginInputValid } from "../helpers/validateInput";
-import { doc, setDoc } from "firebase/firestore";
 
 const firebaseErrors = {
    "Firebase: Error (auth/missing-password).": "Missing password",
@@ -46,8 +53,8 @@ const LoginForm = ({ setLoggedIn, setUser, regForm, setRegForm }) => {
 
    useEffect(() => {
       onAuthStateChanged(auth, (currentUser) => {
-         //setUser(currentUser);
-         //addData(currentUser);
+         setUser(currentUser);
+         if (currentUser) setLoggedIn(true);
       });
    }, [setLoggedIn, setUser]);
 
@@ -65,8 +72,9 @@ const LoginForm = ({ setLoggedIn, setUser, regForm, setRegForm }) => {
          setUser(user.user);
          setLoggedIn(true);
       } catch (error) {
-         const regFirebaseError = firebaseErrors[error.message] || "Something went wrong";
-         setError(regFirebaseError);
+         const logFirebaseError =
+            firebaseErrors[error.message] || "Something went wrong";
+         setError(logFirebaseError);
       }
    };
    return (
@@ -93,7 +101,10 @@ const LoginForm = ({ setLoggedIn, setUser, regForm, setRegForm }) => {
                   setPassword(e.target.value);
                }}
             />
-            <div className="alert-error" style={{ opacity: `${error !== "" ? "1" : "0"}` }}>
+            <div
+               className="alert-error"
+               style={{ opacity: `${error !== "" ? "1" : "0"}` }}
+            >
                {error}
             </div>
 
@@ -102,11 +113,19 @@ const LoginForm = ({ setLoggedIn, setUser, regForm, setRegForm }) => {
             </Button>
          </Form>
          <Button className="form-btn" type="button" onClick={loginWithGoogle}>
-            <img src={Google} alt="google icon" className="form-btn-icon-google" />
+            <img
+               src={Google}
+               alt="google icon"
+               className="form-btn-icon-google"
+            />
             Log In with Google
          </Button>
          <Button className="form-btn" type="button" onClick={loginWithFacebook}>
-            <img src={Facebook} alt="facebook icon" className="form-btn-icon-fb" />
+            <img
+               src={Facebook}
+               alt="facebook icon"
+               className="form-btn-icon-fb"
+            />
             Log In with Facebook
          </Button>
       </div>
@@ -114,3 +133,4 @@ const LoginForm = ({ setLoggedIn, setUser, regForm, setRegForm }) => {
 };
 
 export default LoginForm;
+

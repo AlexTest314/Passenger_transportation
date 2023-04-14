@@ -9,10 +9,24 @@ const Switcher = ({ regForm, setRegForm }) => {
 
    return (
       <div className="switch-container">
-         <Button type="button" className={` shadow-none mb-0 border-0 w-75 btn-round-left btn-${regForm ? "outline-" : ""}info`} active onClick={switcher}>
+         <Button
+            type="button"
+            className={` shadow-none mb-0 border-0 w-75 btn-round-left btn-${
+               regForm ? "outline-" : ""
+            }info`}
+            active
+            onClick={switcher}
+         >
             Registration
          </Button>
-         <Button type="button" className={` shadow-none mb-0 border-0 w-75 btn-round-right btn-${regForm ? "" : "outline-"}info`} active onClick={switcher}>
+         <Button
+            type="button"
+            className={` shadow-none mb-0 border-0 w-75 btn-round-right btn-${
+               regForm ? "" : "outline-"
+            }info`}
+            active
+            onClick={switcher}
+         >
             Login
          </Button>
       </div>
@@ -20,3 +34,4 @@ const Switcher = ({ regForm, setRegForm }) => {
 };
 
 export default Switcher;
+

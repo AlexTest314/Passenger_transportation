@@ -1,4 +1,4 @@
-import { collection, doc, getDocs, getDoc, setDoc } from "firebase/firestore";
+import { collection, doc, getDocs, setDoc } from "firebase/firestore";
 import { db } from "./firebase-config";
 
 export const getData = async (users) => {
@@ -16,5 +16,7 @@ export const createUpdateUserData = async (user) => {
       displayName: user.displayName,
       email: user.email,
       phoneNumber: user.phoneNumber,
+      gender: user.gender,
+      age: user.age,
    });
 };
