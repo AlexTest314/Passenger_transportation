@@ -1,0 +1,64 @@
+.background {
+	top: 0rem;
+	left: 0rem;
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(136, 164, 206, 0.8);
+	display: flex;
+	justify-content: center;
+}
+
+.modal-open {
+	align-self: center;
+	width: 45rem;
+  height: 30rem;
+  background: rgb(90, 200, 180);
+  z-index: 10;
+  border-radius: 16px;
+  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
+}
+
+.add-header {
+	text-align: center;
+	font-size: 2rem;
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+}
+.btn-container {
+	margin-left: 3rem;
+	margin-right: 3rem;
+	width: 39rem;
+	display: flex;
+	justify-content: space-around;
+}
+
+.trips-agree-edit-btn {
+	flex: 1;
+	width: 8rem;
+	background: green;
+	height: 2rem;
+}
+.trips-cancel-edit-btn {
+	width: 8rem;
+	flex: 1;
+	background: red;
+	height: 2rem;
+}
+
+
+.add-trip-alert-succ{
+	text-align: center;
+	margin-left: 6rem;
+	height: 1.5rem;
+	font-size: 14px;
+	color: rgb(62, 165, 53);
+}
+
+.add-trip-alert-error{
+	text-align: center;
+	margin-left: 6rem;
+	height: 1.5rem;
+	font-size: 14px;
+	color:  rgb(165, 53, 53);
+}

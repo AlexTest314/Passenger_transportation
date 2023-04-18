@@ -1,0 +1,31 @@
+.trips-table-main {
+	width: 74rem;
+	max-height: 24rem;
+	overflow-y: auto
+}
+.trips-table-container {
+	flex: 1;
+	flex-direction: column;
+	width: 72.5rem;
+}
+
+.trips-table-row {
+	height: 3rem;
+	background-color: lightgreen;
+		margin-top: 0.5rem;
+		padding-bottom: 0.5rem;
+}
+
+.trips-table-row-item {
+	flex: 1;
+}
+s
+.trips-agree-edit-btn {
+	background: green;
+	height: 1.4rem;
+}
+.trips-cancel-edit-btn {
+	background: red;
+	height: 1.4rem;
+}
+

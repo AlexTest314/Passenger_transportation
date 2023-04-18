@@ -5,16 +5,7 @@ import Trips from "./Trips";
 import Users from "./Users";
 
 const AdminMain = ({ user, section, setLoggedIn }) => {
-   return section === "Profile" ? (
-      <Profile user={user} />
-   ) : section === "Settings" ? (
-      <Settings />
-   ) : section === "Users" ? (
-      <Users user={user} />
-   ) : (
-      <Trips />
-   );
+  return section === "Profile" ? <Profile user={user} /> : section === "Settings" ? <Settings /> : section === "Users" ? <Users user={user} /> : <Trips />;
 };
 
 export default AdminMain;
-

@@ -1,0 +1,17 @@
+.trips-table-row {
+	display: flex;
+	justify-content: space-around;
+}
+.trips-row-item {
+	margin-top: 0.25rem;
+	align-self: center;
+	text-align: center;
+	width: 11rem;
+}
+
+.trips-table-edit-btn {
+	align-self: center;
+	width: 5.5rem;
+	height: 2rem;
+}
+

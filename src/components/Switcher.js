@@ -30,4 +30,3 @@ const Switcher = ({ regForm, setRegForm }) => {
 };
 
 export default Switcher;
-
