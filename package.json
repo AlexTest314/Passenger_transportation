@@ -1,7 +1,7 @@
 {
   "name": "passenger-transportation",
   "version": "0.1.0",
-  "homepage": "",
+  "homepage": "https://alextest314.github.io/Passenger_transportation/",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
