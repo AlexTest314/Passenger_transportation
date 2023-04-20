@@ -1,19 +1,15 @@
 import { initializeApp } from "firebase/app";
-import {
-   getAuth,
-   GoogleAuthProvider,
-   FacebookAuthProvider,
-} from "firebase/auth";
+import { getAuth, GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-   apiKey: "AIzaSyDGbRh9KmZPXPtbkm7lKbRNJ9CqPod2p_Y",
-   authDomain: "pass-transport.firebaseapp.com",
-   projectId: "pass-transport",
-   storageBucket: "pass-transport.appspot.com",
-   messagingSenderId: "988494787590",
-   appId: "1:988494787590:web:a3c45df17887b242c27f87",
-   measurementId: "G-HCCTM0WBBV",
+  apiKey: "AIzaSyDGbRh9KmZPXPtbkm7lKbRNJ9CqPod2p_Y",
+  authDomain: "pass-transport.firebaseapp.com",
+  projectId: "pass-transport",
+  storageBucket: "pass-transport.appspot.com",
+  messagingSenderId: "988494787590",
+  appId: "1:988494787590:web:a3c45df17887b242c27f87",
+  measurementId: "G-HCCTM0WBBV"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -26,6 +22,6 @@ const providerFacebook = new FacebookAuthProvider();
 providerFacebook.addScope("user_birthday");
 
 export const providers = {
-   google: providerGoogle,
-   facebook: providerFacebook,
+  google: providerGoogle,
+  facebook: providerFacebook
 };

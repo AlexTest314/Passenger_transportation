@@ -1,5 +1,5 @@
 .reg-form-container {
-	height:29rem;
+	height:33rem;
 	width: 32rem;
 	background-color: #17a2b8;
 	border-radius: 0.3rem;
@@ -47,6 +47,14 @@
 .reg-alert-error {
 	text-align: center;
 	height: 1.5rem;
+	margin-left: 0rem;
+	font-size: 14px;
+	color: rgb(165, 53, 53);
+}
+.phone-alert-error {
+	text-align: center;
+	height: 1.5rem;
+	margin-top: 3rem;
 	margin-left: 0rem;
 	font-size: 14px;
 	color: rgb(165, 53, 53);
