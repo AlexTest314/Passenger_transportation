@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/Passenger_transportation/static/css/main.4af3cf12.css",
+    "main.js": "/Passenger_transportation/static/js/main.34f6ab36.js",
+    "static/media/bg.jpg": "/Passenger_transportation/static/media/bg.0934ab70825b50fc7ac6.jpg",
+    "static/media/sidebar-settings.svg": "/Passenger_transportation/static/media/sidebar-settings.6fad72b31fa71530b48515b1b6dada04.svg",
+    "static/media/sidebar-users.svg": "/Passenger_transportation/static/media/sidebar-users.c2ae0c3b587aeed7ebc0f991ba453852.svg",
+    "static/media/trip.svg": "/Passenger_transportation/static/media/trip.361df9281de43476ac1e35be35c02461.svg",
+    "static/media/table-row-delete.svg": "/Passenger_transportation/static/media/table-row-delete.36cc6cd32241ef52a2643c8e01ddb9be.svg",
+    "static/media/table-row-edit.svg": "/Passenger_transportation/static/media/table-row-edit.a8c6d86de4ad30b4605d69172f76ac03.svg",
+    "static/media/sidebar-log-out.svg": "/Passenger_transportation/static/media/sidebar-log-out.8eca024af02927001542a6a2e330979b.svg",
+    "static/media/google.svg": "/Passenger_transportation/static/media/google.90c1034d20770987aabba2bb7489eff6.svg",
+    "index.html": "/Passenger_transportation/index.html",
+    "static/media/users-edit-cancel.svg": "/Passenger_transportation/static/media/users-edit-cancel.e3bfc80802390939eb44da377359c98f.svg",
+    "static/media/facebook.svg": "/Passenger_transportation/static/media/facebook.032571eab1145e15af9e9fbd70d77b55.svg",
+    "static/media/users-edit-agree.svg": "/Passenger_transportation/static/media/users-edit-agree.5484ce903ae4b36f69418b415f0c7d59.svg",
+    "static/media/sidebar-profile.svg": "/Passenger_transportation/static/media/sidebar-profile.2f4fd0ddf910af86d817fd5788c56d2b.svg",
+    "static/media/sidebar-arrow.svg": "/Passenger_transportation/static/media/sidebar-arrow.21b84d46a34d74d4cb9cd7d3e371fccb.svg",
+    "main.4af3cf12.css.map": "/Passenger_transportation/static/css/main.4af3cf12.css.map",
+    "main.34f6ab36.js.map": "/Passenger_transportation/static/js/main.34f6ab36.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4af3cf12.css",
+    "static/js/main.34f6ab36.js"
+  ]
+}
