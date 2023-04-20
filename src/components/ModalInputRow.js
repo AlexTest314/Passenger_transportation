@@ -46,16 +46,18 @@ const ModalInputRow = ({ header, label, newTrip, setNewTrip, isEdit, changedTrip
         {!chosen ? (
           <ul className='list-of-elements'>
             {Object.values(header === "carNumber" ? carNumbers : header === "driver" ? drivers : cities).map((num, index) => {
-              if (num.includes(isEdit ? changedTrip[header] : newTrip[header])) {
-                return (
-                  <li
-                    key={index}
-                    className='list-item'
-                    onClick={() => choosed(index, header)}>
-                    {num}
-                  </li>
-                );
-              }
+              return (
+                <div>
+                  {num.includes(isEdit ? changedTrip[header] : newTrip[header]) ? (
+                    <li
+                      key={index}
+                      className='list-item'
+                      onClick={() => choosed(index, header)}>
+                      {num}
+                    </li>
+                  ) : null}
+                </div>
+              );
             })}
           </ul>
         ) : null}

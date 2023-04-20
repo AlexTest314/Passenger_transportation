@@ -36,15 +36,17 @@ const CurrentTrips = ({ setIsEdit, setEditTrip }) => {
                   className='trips-table-row'
                   key={trip.id}>
                   {Object.values(trip).map((key, index) => {
-                    if (index !== 5) {
-                      return (
-                        <div
-                          className='trips-row-item'
-                          key={key}>
-                          {key}
-                        </div>
-                      );
-                    }
+                    return (
+                      <>
+                        {index !== 5 ? (
+                          <div
+                            className='trips-row-item'
+                            key={key}>
+                            {key}
+                          </div>
+                        ) : null}
+                      </>
+                    );
                   })}
                   <Button
                     className='btn-warning pl-3 pt-1 mt-2 trips-table-edit-btn'
