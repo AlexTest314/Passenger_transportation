@@ -1,4 +1,4 @@
-.table-header {
+.users-table-header {
 	height: 5rem;
 		border-bottom: solid 2px black;
 		display: flex;
@@ -6,7 +6,7 @@
 		align-items: center;
 	}
 
-.table-header-item {
+.users-table-header-item {
 	flex: 1;
 	text-align: center;
 }

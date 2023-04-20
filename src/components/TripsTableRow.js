@@ -11,16 +11,28 @@ const TripsTableRow = ({ isAddTrip, setIsAddTrip }) => {
   return (
     <div className='trips-table-main'>
       {isAddTrip ? (
-        <Modal
-          setIsAddTrip={setIsAddTrip}
-          isAddTrip={isAddTrip}
-        />
+        <>
+          <Modal
+            setIsAddTrip={setIsAddTrip}
+            isAddTrip={isAddTrip}
+          />
+          <CurrentTrips
+            setIsEdit={setIsEdit}
+            setEditTrip={setEditTrip}
+          />
+        </>
       ) : isEdit ? (
-        <Modal
-          setIsEdit={setIsEdit}
-          isEdit={isEdit}
-          editTrip={editTrip}
-        />
+        <>
+          <Modal
+            setIsEdit={setIsEdit}
+            isEdit={isEdit}
+            editTrip={editTrip}
+          />
+          <CurrentTrips
+            setIsEdit={setIsEdit}
+            setEditTrip={setEditTrip}
+          />
+        </>
       ) : (
         <CurrentTrips
           setIsEdit={setIsEdit}

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { getData } from "../helpers/firebase-db";
 import "../styles/users.css";
-import TableHeader from "./TableHeader";
-import TableRow from "./TableRow";
+import UsersTableHeader from "./UsersTableHeader";
+import UsersTableRow from "./UsersTableRow";
 
 const Users = () => {
   const [users, setUsers] = useState();
@@ -24,13 +24,13 @@ const Users = () => {
     <div className='users-container'>
       {
         <div className='users-table'>
-          <TableHeader />
+          <UsersTableHeader />
 
           {!users
             ? null
             : users.map((user) => {
                 return (
-                  <TableRow
+                  <UsersTableRow
                     user={user}
                     key={user.id}
                   />

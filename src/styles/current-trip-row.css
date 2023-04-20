@@ -6,12 +6,12 @@
 	margin-top: 0.25rem;
 	align-self: center;
 	text-align: center;
-	width: 11rem;
+	width: 12rem;
 }
 
-.trips-table-edit-btn {
+.trips-table-btn {
+	background-color: transparent;
 	align-self: center;
-	width: 5.5rem;
+	width: 2rem;
 	height: 2rem;
 }
-

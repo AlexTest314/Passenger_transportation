@@ -1,15 +1,15 @@
 import React from "react";
 import { usersHeaders } from "../helpers/headerValues";
-import "../styles/table-header.css";
+import "../styles/users-table-header.css";
 
-const TableHeader = () => {
+const UsersTableHeader = () => {
   const headers = Object.values(usersHeaders);
   return (
-    <div className='table-header'>
+    <div className='users-table-header'>
       {headers.map((header) => {
         return (
           <div
-            className='table-header-item'
+            className='users-table-header-item'
             key={header}>
             {header}
           </div>
@@ -19,4 +19,4 @@ const TableHeader = () => {
   );
 };
 
-export default TableHeader;
+export default UsersTableHeader;

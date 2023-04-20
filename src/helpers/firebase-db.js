@@ -14,6 +14,10 @@ export const createUpdateUserData = async (userInfo) => {
     userInfo.id = userInfo.uid;
   }
 
+  if (userInfo.displayName === null) {
+    userInfo.displayName = userInfo.email.substring(0, userInfo.email.indexOf("@"));
+  }
+
   const user = {
     id: userInfo.id,
     displayName: userInfo.displayName,
@@ -29,7 +33,7 @@ export const createUpdateUserData = async (userInfo) => {
   await setDoc(doc(db, "auth", "users"), usersToDb);
 };
 
-export const createTripsData = async (tripInfo) => {
+export const createUpdateTripsData = async (tripInfo) => {
   const tripsFromDb = await getData("trips", "tripsData");
 
   const trip = {
@@ -45,19 +49,11 @@ export const createTripsData = async (tripInfo) => {
   await setDoc(doc(db, "trips", "tripsData"), tripsToDb);
 };
 
-export const updateTripsData = async (tripInfo) => {
+export const deleteTripsData = async (id) => {
   const tripsFromDb = await getData("trips", "tripsData");
 
-  const trip = {
-    carNumber: tripInfo.carNumber,
-    fromCity: tripInfo.fromCity,
-    toCity: tripInfo.toCity,
-    tp: tripInfo.tp,
-    driver: tripInfo.driver
-  };
-
+  delete tripsFromDb[id];
   const tripsToDb = { ...tripsFromDb };
-  tripsToDb[tripInfo.id] = JSON.stringify(trip);
   await setDoc(doc(db, "trips", "tripsData"), tripsToDb);
 };
 
@@ -75,18 +71,18 @@ export const createInitialData = async (initInfo) => {
 
     for (const key in parsedInitsFromDb) {
       if (key === "carNumbers") {
-        const foundCarNumber = parsedInitsFromDb[key].some((carNumber) => carNumber !== initInfo.carNumber);
-        if (!foundCarNumber) parsedInitsFromDb[key].push(initInfo.carNumber);
+        const foundCarNumber = parsedInitsFromDb[key].some((carNumber) => carNumber === initInfo.carNumber);
+        if (foundCarNumber === false) parsedInitsFromDb[key].push(initInfo.carNumber);
       }
       if (key === "cities") {
-        const foundStartCity = parsedInitsFromDb[key].some((city) => city !== initInfo.fromCity);
-        if (!foundStartCity) parsedInitsFromDb[key].push(initInfo.fromCity);
-        const foundEndCity = parsedInitsFromDb[key].some((city) => city !== initInfo.toCity);
-        if (!foundEndCity) parsedInitsFromDb[key].push(initInfo.toCity);
+        const foundStartCity = parsedInitsFromDb[key].some((city) => city === initInfo.fromCity);
+        if (foundStartCity === false) parsedInitsFromDb[key].push(initInfo.fromCity);
+        const foundEndCity = parsedInitsFromDb[key].some((city) => city === initInfo.toCity);
+        if (foundEndCity === false) parsedInitsFromDb[key].push(initInfo.toCity);
       }
       if (key === "drivers") {
-        const foundDriver = parsedInitsFromDb[key].some((driver) => driver !== initInfo.driver);
-        if (!foundDriver) parsedInitsFromDb[key].push(initInfo.driver);
+        const foundDriver = parsedInitsFromDb[key].some((driver) => driver === initInfo.driver);
+        if (foundDriver === false) parsedInitsFromDb[key].push(initInfo.driver);
       }
     }
     initsData = parsedInitsFromDb;

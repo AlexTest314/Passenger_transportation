@@ -21,6 +21,7 @@
 .trips-table-header-btn {
 	align-self: center;
 	height: 2rem;
+	width: 6rem;
+	margin-right: 2rem;
 	margin-left: 0.5rem;
-	margin-right: 3rem;
 }

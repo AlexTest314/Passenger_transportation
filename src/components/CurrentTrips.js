@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { Button } from "bootstrap-4-react/lib/components";
+import Edit from "../icons/table-row-edit.svg";
+import Delete from "../icons/table-row-delete.svg";
 import "../styles/current-trip-row.css";
-import { getData } from "../helpers/firebase-db";
+import { deleteTripsData, getData } from "../helpers/firebase-db";
 import { useEffect } from "react";
 
 const CurrentTrips = ({ setIsEdit, setEditTrip }) => {
@@ -22,7 +24,12 @@ const CurrentTrips = ({ setIsEdit, setEditTrip }) => {
     initsData();
   }, []);
 
+  const deleteTrip = (id) => {
+    deleteTripsData(id);
+  };
+
   const edit = (trip) => {
+    console.log("trip", trip);
     setIsEdit(true);
     setEditTrip(trip);
   };
@@ -49,10 +56,24 @@ const CurrentTrips = ({ setIsEdit, setEditTrip }) => {
                     );
                   })}
                   <Button
-                    className='btn-warning pl-3 pt-1 mt-2 trips-table-edit-btn'
+                    className='btn-transparent pl-0 pt-1 mt-2 trips-table-btn'
                     type='button'
                     onClick={() => edit(trip)}>
-                    Edit
+                    <img
+                      src={Edit}
+                      className='table-row-icon'
+                      alt='edit-trip-icon'
+                    />
+                  </Button>
+                  <Button
+                    className='btn-transparent pl-0 pt-1 mt-2 trips-table-btn'
+                    type='button'
+                    onClick={() => deleteTrip(trip.id)}>
+                    <img
+                      src={Delete}
+                      className='table-row-icon'
+                      alt='delete-trip-icon'
+                    />
                   </Button>
                 </div>
               </>

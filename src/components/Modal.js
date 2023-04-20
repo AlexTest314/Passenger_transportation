@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Form, Button } from "bootstrap-4-react/lib/components";
 import "../styles/modal.css";
 import { tripsHeaders } from "../helpers/headerValues";
-import { createInitialData, createTripsData, updateTripsData } from "../helpers/firebase-db";
+import { createInitialData, createUpdateTripsData } from "../helpers/firebase-db";
 import ModalInputRow from "./ModalInputRow";
 import { validateModal } from "../helpers/validateModal";
 import { v4 as uuid } from "uuid";
@@ -13,9 +13,10 @@ const Modal = ({ isAddTrip, setIsAddTrip, isEdit, setIsEdit, editTrip }) => {
   const [changedTrip, setChangedTrip] = useState(editTrip);
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
+  console.log("changedTrip", changedTrip);
 
   const close = () => {
-    setIsAddTrip ? setIsAddTrip(false) : setIsEdit(false);
+    isAddTrip ? setIsAddTrip(false) : setIsEdit(false);
   };
 
   const onSubmit = (e) => {
@@ -32,8 +33,8 @@ const Modal = ({ isAddTrip, setIsAddTrip, isEdit, setIsEdit, editTrip }) => {
     newTrip["id"] = tripId;
 
     try {
-      isEdit ? updateTripsData(changedTrip) : createTripsData(newTrip);
-      createInitialData(newTrip);
+      isEdit ? createUpdateTripsData(changedTrip) : createUpdateTripsData(newTrip);
+      isEdit ? createInitialData(changedTrip) : createInitialData(newTrip);
     } catch (error) {
       const logFirebaseError = firebaseErrors[error.message] || "Something went wrong";
       setError(logFirebaseError);
