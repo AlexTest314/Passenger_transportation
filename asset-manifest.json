@@ -1,11 +1,12 @@
 {
   "files": {
-    "main.css": "/Passenger_transportation/static/css/main.4af3cf12.css",
-    "main.js": "/Passenger_transportation/static/js/main.34f6ab36.js",
+    "main.css": "/Passenger_transportation/static/css/main.987c4f35.css",
+    "main.js": "/Passenger_transportation/static/js/main.05d395df.js",
     "static/media/bg.jpg": "/Passenger_transportation/static/media/bg.0934ab70825b50fc7ac6.jpg",
     "static/media/sidebar-settings.svg": "/Passenger_transportation/static/media/sidebar-settings.6fad72b31fa71530b48515b1b6dada04.svg",
     "static/media/sidebar-users.svg": "/Passenger_transportation/static/media/sidebar-users.c2ae0c3b587aeed7ebc0f991ba453852.svg",
     "static/media/trip.svg": "/Passenger_transportation/static/media/trip.361df9281de43476ac1e35be35c02461.svg",
+    "static/media/phone.svg": "/Passenger_transportation/static/media/phone.e12be68aad85625f9493568dd5cdfa53.svg",
     "static/media/table-row-delete.svg": "/Passenger_transportation/static/media/table-row-delete.36cc6cd32241ef52a2643c8e01ddb9be.svg",
     "static/media/table-row-edit.svg": "/Passenger_transportation/static/media/table-row-edit.a8c6d86de4ad30b4605d69172f76ac03.svg",
     "static/media/sidebar-log-out.svg": "/Passenger_transportation/static/media/sidebar-log-out.8eca024af02927001542a6a2e330979b.svg",
@@ -16,11 +17,11 @@
     "static/media/users-edit-agree.svg": "/Passenger_transportation/static/media/users-edit-agree.5484ce903ae4b36f69418b415f0c7d59.svg",
     "static/media/sidebar-profile.svg": "/Passenger_transportation/static/media/sidebar-profile.2f4fd0ddf910af86d817fd5788c56d2b.svg",
     "static/media/sidebar-arrow.svg": "/Passenger_transportation/static/media/sidebar-arrow.21b84d46a34d74d4cb9cd7d3e371fccb.svg",
-    "main.4af3cf12.css.map": "/Passenger_transportation/static/css/main.4af3cf12.css.map",
-    "main.34f6ab36.js.map": "/Passenger_transportation/static/js/main.34f6ab36.js.map"
+    "main.987c4f35.css.map": "/Passenger_transportation/static/css/main.987c4f35.css.map",
+    "main.05d395df.js.map": "/Passenger_transportation/static/js/main.05d395df.js.map"
   },
   "entrypoints": [
-    "static/css/main.4af3cf12.css",
-    "static/js/main.34f6ab36.js"
+    "static/css/main.987c4f35.css",
+    "static/js/main.05d395df.js"
   ]
 }
