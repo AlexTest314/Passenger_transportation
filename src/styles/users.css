@@ -22,4 +22,32 @@
 		align-items: center;
 		}
 
+		.users-table-container {
+			width: 72.5rem;
+		
+	}	
 	
+	
+		@media screen and (max-width: 900px) {
+
+			.users-table-container {
+				flex: 1;
+				flex-direction: column;
+				width: 30rem;
+				max-height: 9rem;
+				overflow-y: auto
+			}
+			.users-container {
+				width: 40rem ;
+				height: 20rem;
+				}
+			
+				.users-table {
+					width: 35rem ;
+					height: 15rem;
+					margin-left: auto;
+					margin-right: auto;
+					}
+			
+		
+		}

@@ -11,6 +11,7 @@
 
 .trips-table-row {
 	height: 3rem;
+	border-radius: 0.5rem;
 	background-color: lightgreen;
 		margin-top: 0.5rem;
 		padding-bottom: 0.5rem;
@@ -29,3 +30,39 @@ s
 	height: 1.4rem;
 }
 
+
+@media screen and (max-width: 900px) {
+	.trips-table-main {
+		width: 30rem;
+		max-height: 11rem;
+		overflow-y: auto
+	}
+	.trips-table-container {
+		flex: 1;
+		flex-direction: column;
+		width: 30rem;
+	}
+	
+	.trips-table-row {
+		font-size: 0.75rem;
+		border-radius: 0.5rem;
+		height: 2rem;
+		background-color: lightgreen;
+			margin-top: 0.5rem;
+			padding-bottom: 0.5rem;
+	}
+	
+	.trips-table-row-item {
+		flex: 1;
+	}
+	
+	.trips-agree-edit-btn {
+		background: green;
+		height: 1.4rem;
+	}
+	.trips-cancel-edit-btn {
+		background: red;
+		height: 1.4rem;
+	}
+
+}

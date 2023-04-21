@@ -23,3 +23,17 @@
 		}
 
 	
+		@media screen and (max-width: 900px) {
+			.trips-container {
+				width: 40rem ;
+				height: 20rem;
+				}
+			
+				.trips-table {
+					width: 35rem ;
+					height: 15rem;
+					margin-left: auto;
+					margin-right: auto;
+					}
+		
+		}

@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import "../styles/sidebar.css";
 import { Button } from "bootstrap-4-react/lib/components";
-
 import Settings from "../icons/sidebar-settings.svg";
 import Profile from "../icons/sidebar-profile.svg";
 import Arrow from "../icons/sidebar-arrow.svg";
 import Trip from "../icons/trip.svg";
 import LogOut from "../icons/sidebar-log-out.svg";
 
-const Sidebar = ({ signout, user, section, setSection }) => {
+const Sidebar = ({ signout, section, setSection }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const hanleHumb = () => {
@@ -43,9 +42,8 @@ const Sidebar = ({ signout, user, section, setSection }) => {
           Settings
         </Button>
       </div>
-      {/* <div className="user">{user.email}</div> */}
       <Button
-        className='btn-primary sidebar-signout-btn'
+        className='btn-warning sidebar-signout-btn'
         onClick={signout}>
         Sign Out
       </Button>

@@ -3,6 +3,7 @@ import { Form, Button } from "bootstrap-4-react/lib/components";
 import Switcher from "./Switcher";
 import Facebook from "../icons/facebook.svg";
 import Google from "../icons/google.svg";
+import Phone from "../icons/phone.svg";
 import { getData } from "../helpers/firebase-db";
 import { auth, providers } from "../helpers/firebase-config";
 import { onAuthStateChanged, RecaptchaVerifier, signInWithEmailAndPassword, signInWithPhoneNumber, signInWithPopup } from "firebase/auth";
@@ -54,6 +55,7 @@ const LoginForm = ({ setLoggedIn, setUser, regForm, setRegForm }) => {
       .then((confirmationResult) => {
         window.confirmationResult = confirmationResult;
         if (confirmationResult) setIsVerif(true);
+        setError("");
       })
       .catch((error) => {
         const logFirebaseError = firebaseErrors[error.message] || "Something went wrong";
@@ -113,7 +115,7 @@ const LoginForm = ({ setLoggedIn, setUser, regForm, setRegForm }) => {
                 setRegForm={setRegForm}
               />
               <input
-                className='form-input'
+                className='form-input-phone'
                 id='code'
                 name='code'
                 type='code'
@@ -144,7 +146,7 @@ const LoginForm = ({ setLoggedIn, setUser, regForm, setRegForm }) => {
                 setRegForm={setRegForm}
               />
               <input
-                className='form-input'
+                className='form-input-phone'
                 id='phone'
                 name='phone'
                 type='phone'
@@ -210,35 +212,40 @@ const LoginForm = ({ setLoggedIn, setUser, regForm, setRegForm }) => {
               type='submit'>
               Log In
             </Button>
-            <Button
-              className='form-btn'
-              type='button'
-              onClick={() => setIsPhoneLogin(true)}>
-              Log In with phone
-            </Button>
+            <div className='log-social-btns'>
+              Log In with:
+              <Button
+                className='m-0  ml-2 p-0 border-0 log-form-btn-icon'
+                type='button'
+                onClick={() => setIsPhoneLogin(true)}>
+                <img
+                  src={Phone}
+                  alt='phone icon'
+                  className='log-form-btn-icon-phone'
+                />
+              </Button>
+              <Button
+                className='m-0  ml-2 p-0 border-0 log-form-btn-icon'
+                type='button'
+                onClick={() => loginWithProvider("google")}>
+                <img
+                  src={Google}
+                  alt='google icon'
+                  className='log-form-btn-icon-google'
+                />
+              </Button>
+              <Button
+                className='m-0  ml-2 p-0 border-0 log-form-btn-icon'
+                type='button'
+                onClick={() => loginWithProvider("facebook")}>
+                <img
+                  src={Facebook}
+                  alt='facebook icon'
+                  className='log-form-btn-icon-fb'
+                />
+              </Button>
+            </div>
           </Form>
-          <Button
-            className='form-btn'
-            type='button'
-            onClick={() => loginWithProvider("google")}>
-            <img
-              src={Google}
-              alt='google icon'
-              className='form-btn-icon-google'
-            />
-            Log In with Google
-          </Button>
-          <Button
-            className='form-btn'
-            type='button'
-            onClick={() => loginWithProvider("facebook")}>
-            <img
-              src={Facebook}
-              alt='facebook icon'
-              className='form-btn-icon-fb'
-            />
-            Log In with Facebook
-          </Button>
         </div>
       )}
     </div>

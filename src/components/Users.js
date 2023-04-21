@@ -25,17 +25,18 @@ const Users = () => {
       {
         <div className='users-table'>
           <UsersTableHeader />
-
-          {!users
-            ? null
-            : users.map((user) => {
-                return (
-                  <UsersTableRow
-                    user={user}
-                    key={user.id}
-                  />
-                );
-              })}
+          <div className='users-table-container'>
+            {!users
+              ? null
+              : users.map((user) => {
+                  return (
+                    <UsersTableRow
+                      user={user}
+                      key={user.id}
+                    />
+                  );
+                })}
+          </div>
         </div>
       }
     </div>

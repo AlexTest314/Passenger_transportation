@@ -25,3 +25,28 @@
 	margin-right: 2rem;
 	margin-left: 0.5rem;
 }
+
+
+@media screen and (max-width: 900px) {
+	.trips-table-headers {
+		height: 3rem;
+			width: 30rem;
+		}
+	
+	.trips-table-header {
+		height: 3rem;
+		}
+	
+	.trips-table-header-item {
+		font-size: 0.75rem;
+	}
+	.trips-table-header-btn {
+		font-size: 0.75rem;
+		align-self: center;
+		height: 2rem;
+		width: 5rem;
+		margin-right: 0rem;
+		margin-left: 0.5rem;
+	}
+
+}

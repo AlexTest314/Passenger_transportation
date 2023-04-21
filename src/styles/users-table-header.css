@@ -10,3 +10,18 @@
 	flex: 1;
 	text-align: center;
 }
+
+
+@media screen and (max-width: 900px) {
+	.users-table-header {
+		width: 30rem;
+		display: flex;
+		}
+	
+	.users-table-header-item {
+		margin-top: 1rem;
+		height: 2rem;
+		font-size: 0.75rem;
+	}
+
+}

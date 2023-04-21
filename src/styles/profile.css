@@ -62,4 +62,60 @@
 		color:  rgb(165, 53, 53);
 	}
 
-	
+	@media screen and (max-width: 900px) {
+		.profile-container {
+			width: 25rem ;
+			height: 20rem;
+			}
+		
+			.profile-item {
+				margin: 0rem 3rem 0rem 3rem;
+			}
+		
+			.profile-item-label {
+				font-size: 0.75rem;
+				width: 3rem;
+			}
+		
+			.profile-item-input {
+				font-size: 0.75rem;
+				padding-left: 1rem;
+			width: 15rem;
+			height: 1rem; 
+			}
+			.profile-item-select {
+				padding-left: 1rem;
+			width: 25rem;
+			height: 1rem; 
+			border-radius: 5px;
+			outline: none;
+			border: none;
+			margin: 0rem 0rem 1rem 1rem;
+			}
+			.profile-item-btn {
+				padding-top: 0rem;
+				height: 2rem;
+				font-size: 0.5rem;
+				align-self: center;
+				margin: 1rem 4rem 2rem 8rem;
+				width: 15rem;
+			}
+		
+			.profile-alert-succ{
+				font-size: 0.5rem;
+				text-align: center;
+				margin-left: 4rem;
+				height: 1rem;
+				font-size: 14px;
+				color: rgb(62, 165, 53);
+			}
+			
+			.profile-alert-error{
+				font-size: 0.75rem;
+				text-align: center;
+				margin-left: 4rem;
+				height: 1rem;
+				font-size: 14px;
+				color:  rgb(165, 53, 53);
+			}
+	}

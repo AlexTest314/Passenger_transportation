@@ -54,3 +54,56 @@
 		font-size: 14px;
 		color:  rgb(165, 53, 53);
 	}
+
+
+	@media screen and (max-width: 900px) {
+		.settings-container {
+			width: 30rem ;
+			}
+		
+			
+		
+			.settings-item-label {
+				font-size: 0.75rem;
+				width: 6rem;
+				color: lightgray;
+			}
+			.settings-item:first-child {
+				margin-top: 2rem;
+			}
+			.settings-item-input {
+				font-size: 0.75rem;
+				padding-left: 1rem;
+			width: 15rem;
+			height: 1rem;
+			border-radius: 5px;
+			outline: none;
+			border: none;
+			margin: 0rem 0rem 0rem 1rem;
+			}
+			
+			.settings-item-btn {
+				font-size: 0.75rem;
+				padding: 0;
+				align-self: center;
+				margin: 1rem 3rem 2rem 10rem;
+				width: 15rem;
+				height: 2rem;
+			}
+		
+			.settings-alert-succ{
+				text-align: center;
+				margin-left: 7rem;
+				height: 1rem;
+				font-size: 14px;
+				color: rgb(62, 165, 53);
+			}
+		
+			.settings-alert-error{
+				text-align: center;
+				margin-left: 7rem;
+				height: 1rem;
+				font-size: 14px;
+				color:  rgb(165, 53, 53);
+			}
+	}

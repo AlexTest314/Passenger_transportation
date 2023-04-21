@@ -1,11 +1,11 @@
 .reg-form-container {
-	height:33rem;
+	height:26rem;
 	width: 32rem;
 	background-color: #17a2b8;
 	border-radius: 0.3rem;
 }
 .reg-form-input:first-child {
-	margin-top: 1rem;
+	margin-top: 2rem;
 }
 .reg-form-input {
 	padding-left: 1rem; 
@@ -31,17 +31,35 @@
 	color: azure;
 	
 }
+.reg-form-btn-icon {
+	border-radius: 0.5rem;
+	height: 3rem;
+	width: 9rem;
+	margin: 1rem 3rem 0rem 3rem;
+	 background-color: #007bff; 
+	color: azure;
+	
+}
 .reg-form-btn:hover {
 	background-color: #4f9bed;
 	
 }
-
+.social-btns {
+	color: azure;
+	margin-top: 1rem;
+	justify-content: center;
+	align-items: center;
+	width: 26rem;
+	margin-left: 3rem;
+	display: flex;
+}
 .reg-form-btn-icon-google {
-	margin-right: 1rem;
+	margin-right: 0rem;
+	margin-left: 0rem;
 }
 .reg-form-btn-icon-fb {
-	margin-left: 0.7rem;
-	margin-right: 1.1rem;
+	margin-left: 0rem;
+	margin-right: 0rem;
 }
 
 .reg-alert-error {
@@ -58,4 +76,12 @@
 	margin-left: 0rem;
 	font-size: 14px;
 	color: rgb(165, 53, 53);
+}
+
+
+@media screen and (max-width: 900px) {
+   .reg-form-container {
+	margin-left: auto;
+	margin-right: auto;
+}
 }
